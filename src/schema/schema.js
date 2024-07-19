@@ -16,7 +16,14 @@ const accountSchema = {
   balance: "number",
 };
 
+const transactionSchema = {
+  sourceAccountId: "string",
+  destinationAccountId: "string",
+  amount: "number",
+};
+
 module.exports = {
   userSchema,
   accountSchema,
+  transactionSchema,
 };
