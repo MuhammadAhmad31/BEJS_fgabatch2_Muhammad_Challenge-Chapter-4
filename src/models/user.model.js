@@ -82,8 +82,25 @@ const getUserById = async (id) => {
   }
 };
 
+const getUserByEmail = async (email) => {
+  try {
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
+    return user;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+const validatePassword = async (inputPassword, storedPassword) => {
+  return bcrypt.compare(inputPassword, storedPassword);
+};
+
 module.exports = {
   createUser,
   getAllUsers,
   getUserById,
+  getUserByEmail,
+  validatePassword,
 };

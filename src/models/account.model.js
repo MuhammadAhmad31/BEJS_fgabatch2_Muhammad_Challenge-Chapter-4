@@ -49,6 +49,18 @@ const getAccountById = async (id) => {
   }
 };
 
+const updateAccountBalance = async (accountId, amount) => {
+  try {
+    const account = await prisma.bankAccount.update({
+      where: { id: accountId },
+      data: { balance: { increment: amount } },
+    });
+    return account;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
 const getAccountsByUserId = async (userId) => {
   try {
     const accounts = await prisma.bankAccount.findMany({
@@ -67,4 +79,5 @@ module.exports = {
   getAllAccounts,
   getAccountById,
   getAccountsByUserId,
+  updateAccountBalance
 };
