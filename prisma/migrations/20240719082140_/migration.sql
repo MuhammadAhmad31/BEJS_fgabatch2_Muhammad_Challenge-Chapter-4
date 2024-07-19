@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "password" TEXT NOT NULL,
@@ -10,8 +10,8 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "BankAccount" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "bankName" TEXT NOT NULL,
     "bankAccountNumber" TEXT NOT NULL,
     "balance" DOUBLE PRECISION NOT NULL,
@@ -21,8 +21,8 @@ CREATE TABLE "BankAccount" (
 
 -- CreateTable
 CREATE TABLE "Profile" (
-    "id" SERIAL NOT NULL,
-    "userId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "identityType" TEXT NOT NULL,
     "identityNumber" TEXT NOT NULL,
     "address" TEXT NOT NULL,
@@ -32,9 +32,9 @@ CREATE TABLE "Profile" (
 
 -- CreateTable
 CREATE TABLE "Transaction" (
-    "id" SERIAL NOT NULL,
-    "sourceAccountId" INTEGER NOT NULL,
-    "destinationAccountId" INTEGER NOT NULL,
+    "id" TEXT NOT NULL,
+    "sourceAccountId" TEXT NOT NULL,
+    "destinationAccountId" TEXT NOT NULL,
     "amount" DOUBLE PRECISION NOT NULL,
 
     CONSTRAINT "Transaction_pkey" PRIMARY KEY ("id")
