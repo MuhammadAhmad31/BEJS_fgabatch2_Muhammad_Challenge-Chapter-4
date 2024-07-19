@@ -7,7 +7,9 @@ const {
   getDepositById,
   getDepositsByUserId,
 } = require("../models/deposit.model");
+const { depositSchema } = require("../schema/schema");
 const handleResponse = require("../utils/handleResponse");
+const validateData = require("../utils/validateData");
 
 const deposit = async (req, res) => {
   const { userId } = req;
@@ -16,6 +18,15 @@ const deposit = async (req, res) => {
   if (!accountId || !amount) {
     return handleResponse(res, 400, {
       message: "Account ID and amount are required",
+    });
+  }
+
+  const { isValid, message } = validateData({ accountId, amount }, depositSchema);
+
+  if (!isValid) {
+    return handleResponse(res, 400, {
+      message: "Failed to create deposit, invalid data type.",
+      error: message,
     });
   }
 

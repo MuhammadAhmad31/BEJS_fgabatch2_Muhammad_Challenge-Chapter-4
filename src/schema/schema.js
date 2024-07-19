@@ -22,8 +22,21 @@ const transactionSchema = {
   amount: "number",
 };
 
+const depositSchema = {
+  accountId: "string",
+  amount: "number",
+};
+
+const withdrawSchema = {
+  accountId: "string",
+  amount: "number",
+};
+
+
 module.exports = {
   userSchema,
   accountSchema,
   transactionSchema,
+  depositSchema,
+  withdrawSchema,
 };

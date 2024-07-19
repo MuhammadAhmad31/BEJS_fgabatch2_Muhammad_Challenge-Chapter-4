@@ -5,6 +5,8 @@ const {
 } = require("../models/withdrawal.model");
 const handleResponse = require("../utils/handleResponse");
 const { getAccountById, updateAccountBalance } = require("../models/account.model");
+const { withdrawSchema } = require("../schema/schema");
+const validateData = require("../utils/validateData");
 
 const withdraw = async (req, res) => {
   const { userId } = req;
@@ -13,6 +15,15 @@ const withdraw = async (req, res) => {
   if (!accountId || !amount) {
     return handleResponse(res, 400, {
       message: "Account ID and amount are required",
+    });
+  }
+
+  const { isValid, message } = validateData({ accountId, amount }, withdrawSchema);
+
+  if (!isValid) {
+    return handleResponse(res, 400, {
+      message: "Failed to create deposit, invalid data type.",
+      error: message,
     });
   }
 
