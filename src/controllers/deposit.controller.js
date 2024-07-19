@@ -10,6 +10,7 @@ const {
 const handleResponse = require("../utils/handleResponse");
 
 const deposit = async (req, res) => {
+    //   console.log(req)
   const { userId } = req;
   const { accountId, amount } = req.body;
 
@@ -69,28 +70,27 @@ const getById = async (req, res) => {
 };
 
 const getByUserId = async (req, res) => {
-    const { userId } = req;
-    try {
-      const deposits = await getDepositsByUserId(userId);
-      if (!deposits || deposits.length === 0) {
-        handleResponse(res, 404, { message: "No deposits found for this user" });
-        return;
-      }
-      handleResponse(res, 200, {
-        message: "Deposits retrieved successfully",
-        data: deposits,
-      });
-    } catch (err) {
-      handleResponse(res, 500, {
-        message: "Failed to retrieve deposits",
-        error: err.message,
-      });
+  const { userId } = req;
+  try {
+    const deposits = await getDepositsByUserId(userId);
+    if (!deposits || deposits.length === 0) {
+      handleResponse(res, 404, { message: "No deposits found for this user" });
+      return;
     }
-  };
-  
+    handleResponse(res, 200, {
+      message: "Deposits retrieved successfully",
+      data: deposits,
+    });
+  } catch (err) {
+    handleResponse(res, 500, {
+      message: "Failed to retrieve deposits",
+      error: err.message,
+    });
+  }
+};
 
 module.exports = {
   deposit,
   getById,
-  getByUserId
+  getByUserId,
 };

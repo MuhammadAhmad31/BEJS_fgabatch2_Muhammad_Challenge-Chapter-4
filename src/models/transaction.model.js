@@ -1,6 +1,10 @@
 const prisma = require("../config/prisma");
 
-const createTransaction = async ({ sourceAccountId, destinationAccountId, amount }) => {
+const createTransaction = async ({
+  sourceAccountId,
+  destinationAccountId,
+  amount,
+}) => {
   const transaction = await prisma.$transaction(async (prisma) => {
     await prisma.bankAccount.update({
       where: { id: sourceAccountId },

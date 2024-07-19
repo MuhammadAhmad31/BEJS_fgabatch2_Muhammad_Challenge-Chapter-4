@@ -4,7 +4,10 @@ const {
   getWithdrawalByUserId,
 } = require("../models/withdrawal.model");
 const handleResponse = require("../utils/handleResponse");
-const { getAccountById, updateAccountBalance } = require("../models/account.model");
+const {
+  getAccountById,
+  updateAccountBalance,
+} = require("../models/account.model");
 
 const withdraw = async (req, res) => {
   const { userId } = req;
@@ -70,27 +73,29 @@ const getById = async (req, res) => {
 };
 
 const getByUserId = async (req, res) => {
-    const { userId } = req;
-    try {
-      const withdrawal = await getWithdrawalByUserId(userId);
-      if (!withdrawal || withdrawal.length === 0) {
-        handleResponse(res, 404, { message: "No withdrawal found for this user" });
-        return;
-      }
-      handleResponse(res, 200, {
-        message: "Withdrawal retrieved successfully",
-        data: withdrawal,
+  const { userId } = req;
+  try {
+    const withdrawal = await getWithdrawalByUserId(userId);
+    if (!withdrawal || withdrawal.length === 0) {
+      handleResponse(res, 404, {
+        message: "No withdrawal found for this user",
       });
-    } catch (err) {
-      handleResponse(res, 500, {
-        message: "Failed to retrieve deposits",
-        error: err.message,
-      });
+      return;
     }
-  };
+    handleResponse(res, 200, {
+      message: "Withdrawal retrieved successfully",
+      data: withdrawal,
+    });
+  } catch (err) {
+    handleResponse(res, 500, {
+      message: "Failed to retrieve deposits",
+      error: err.message,
+    });
+  }
+};
 
-module.exports = { 
-    withdraw, 
-    getById,
-    getByUserId,
+module.exports = {
+  withdraw,
+  getById,
+  getByUserId,
 };
