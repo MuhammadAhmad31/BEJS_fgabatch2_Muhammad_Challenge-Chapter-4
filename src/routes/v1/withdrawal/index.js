@@ -1,7 +1,10 @@
 const { Router } = require("express");
-const { withdraw, getById, getByUserId } = require("../controllers/withdrawal.controller");
-const authenticate = require("../middleware/auth");
-
+const {
+  withdraw,
+  getById,
+  getByUserId,
+} = require("../../../controllers/withdrawal.controller");
+const authenticate = require("../../../middleware/auth");
 const router = Router();
 
 router.post("/withdrawal/", authenticate, withdraw);

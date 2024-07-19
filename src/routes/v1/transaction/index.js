@@ -1,6 +1,9 @@
 const { Router } = require("express");
-const { create, getAll, getById } = require("../controllers/transaction.controller");
-
+const {
+  create,
+  getAll,
+  getById,
+} = require("../../../controllers/transaction.controller");
 const router = Router();
 
 router.post("/transaction/", create);
