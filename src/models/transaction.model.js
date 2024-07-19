@@ -56,7 +56,7 @@ const getTransactionById = async (id) => {
   try {
     const transaction = await prisma.transaction.findUnique({
       where: {
-        id: parseInt(id, 10),
+        id,
       },
       include: {
         sourceAccount: true,

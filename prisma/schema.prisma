@@ -29,6 +29,8 @@ model BankAccount {
   balance            Float
   transactionsSource Transaction[] @relation("sourceAccount")
   transactionsDest   Transaction[] @relation("destAccount")
+  withdrawals        Withdrawal[]
+  deposits           Deposit[]
 
   user User @relation(fields: [userId], references: [id])
 
@@ -53,4 +55,20 @@ model Transaction {
 
   sourceAccount BankAccount @relation("sourceAccount", fields: [sourceAccountId], references: [id])
   destAccount   BankAccount @relation("destAccount", fields: [destinationAccountId], references: [id])
+}
+
+model Withdrawal {
+  id        String      @id @default(uuid())
+  accountId String
+  amount    Float
+  createdAt DateTime    @default(now())
+  account   BankAccount @relation(fields: [accountId], references: [id])
+}
+
+model Deposit {
+  id        String      @id @default(uuid())
+  accountId String
+  amount    Float
+  createdAt DateTime    @default(now())
+  account   BankAccount @relation(fields: [accountId], references: [id])
 }
