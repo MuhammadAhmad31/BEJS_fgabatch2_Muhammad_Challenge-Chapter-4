@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require("express");
 const v1Routes = require("../src/routes/v1");
+const sweaggerDocs = require("../src/config/swagger");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -13,6 +14,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", v1Routes);
+
+sweaggerDocs(app);
 
 app.use((req, res, next) => {
   res.status(404).json({
